@@ -1,0 +1,26 @@
+
+ clc
+s=0;
+load("new_scaling_mat222.mat");
+for i=1:1
+cv=cvpartition(size(data,1),'HoldOut',0.2);
+idx=cv.test;
+dataTrain=data(~idx,:);
+dataTest=data(idx,:);
+Train=dataTrain(:,2:85);
+Target=dataTrain(:,1);
+
+M1 = svmtrain(Target, Train, '-s 0 -t 2 -c 10000 -g 0.95-v 10'); %if we increse -c value gives better accuracy
+M2 = svmtrain(Target, Train, '-s 0 -t 2 -c 10000 -g 0.95');
+%predict label using SVM predict
+
+Test=dataTest(:,2:85);
+OPL=dataTest(:,1);
+
+[predicted_label] = svmpredict(OPL, Test, M2, 'libsvm_options');
+
+testAccuracy=sum(predicted_label==OPL)/length(Test);
+s=s+testAccuracy;
+fprintf(' \t\t Trial no=%d',i);
+end
+

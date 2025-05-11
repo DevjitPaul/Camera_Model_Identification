@@ -1,0 +1,36 @@
+
+
+X = data;
+
+
+s=max_min_vect(X);
+v=std_vect(s);
+
+
+denominator=@std_vect;
+X_normalized= feature_scaling_mean_normalization(X,denominator);
+
+
+
+
+
+%{
+
+denominator= {@max_min_vect,@std_vect};
+for i = 1:length(denominator)
+    X_normalized{i} = feature_scaling_mean_normalization(X,denominator{i});
+    %X_normalized{i} = feature_scaling_mean_normalization(X(:,2:end),denominator{i});
+end
+%}
+
+
+
+
+
+
+
+%%%%%%%%%%%%  if we devided the matrix with maximum value %%%%%%%%%%%%%%%
+max_value=max(max(X_normalized(:, 2:end)));  %%find maximum val except first column
+disp(max_value);
+
+resultant_mat=X_normalized / max_value;

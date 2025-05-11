@@ -1,0 +1,112 @@
+%{
+input_img=imread('D:\R.jpeg'); % for two scale imresize use
+%imshow(input_img);
+
+val=features(input_img);
+disp(val);
+
+%}
+
+
+clear
+clc
+c=1;
+
+vector=zeros(5000,49);
+
+
+for q=1:18
+    fprintf("camera name=%d\n",q);
+    if q==1
+        location='D:\PROJECT\project_database\afga\*.jpg';
+        ds=imageDatastore(location);
+
+    elseif q==2
+        location='D:\PROJECT\project_database\CANON_Ixus55\*.jpg';
+        ds=imageDatastore(location);
+    
+
+     elseif q==3
+        location='D:\PROJECT\project_database\canon_ixux70\canon_ixux70_0\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==4
+        location='D:\PROJECT\project_database\canon_ixux70\canon_ixux70_1\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==5
+        location='D:\PROJECT\project_database\canon_ixux70\canon_ixux70_2\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==6
+        location='D:\PROJECT\project_database\casio\casio_0\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==7
+        location='D:\PROJECT\project_database\casio\casio_1\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==8
+        location='D:\PROJECT\project_database\casio\casio_2\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==9
+        location='D:\PROJECT\project_database\casio\casio_3\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==10
+        location='D:\PROJECT\project_database\casio\casio_4\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==11
+        location='D:\PROJECT\project_database\Nikon_coolpixs710\Nikon_coolpixs710_0\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==12
+        location='D:\PROJECT\project_database\Nikon_coolpixs710\Nikon_coolpixs710_1\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==13
+        location='D:\PROJECT\project_database\Nikon_coolpixs710\Nikon_coolpixs710_2\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==14
+        location='D:\PROJECT\project_database\Nikon_coolpixs710\Nikon_coolpixs710_3\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==15
+        location='D:\PROJECT\project_database\Nikon_coolpixs710\Nikon_coolpixs710_4\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==16
+        location='D:\PROJECT\project_database\SAMSUNG\SAMSUNG_0\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==17
+        location='D:\PROJECT\project_database\SAMSUNG\SAMSUNG_1\*.jpg';
+        ds=imageDatastore(location);
+
+        elseif q==18
+        location='D:\PROJECT\project_database\SAMSUNG\SAMSUNG_2\*.jpg';
+        ds=imageDatastore(location);
+
+    end
+
+while hasdata(ds)
+    tic
+ime=read(ds);
+ime=imresize(ime,[512 512]);
+val=features(ime);
+%vector(c,1)=q;
+vector(c,2:end)=val;
+toc
+c=c+1;
+
+end
+
+
+end
+
+%disp(vector);
+
+%writematrix(vector,'D:\PROJECT\excel\name.xlsx','Sheet',1);ritematrix(vector,'D:\PROJECT\excel\name.xlsx','Sheet',1);
